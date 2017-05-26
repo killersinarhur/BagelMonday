@@ -34,7 +34,7 @@ class BaseApplication : Application() {
         var dates: ArrayList<PlaceholderDate>? = ArrayList<PlaceholderDate>()
         var reservedDate: ArrayList<DateReservation>? = ArrayList<DateReservation>()
         var userDates: ArrayList<DateReservation>? = ArrayList<DateReservation>()
-        var masterTakenList:ArrayList<DateReservation>?=null
+        var masterTakenList:ArrayList<DateReservation>?=ArrayList<DateReservation>()
         var user: User? = null
 
         fun organizeList() {

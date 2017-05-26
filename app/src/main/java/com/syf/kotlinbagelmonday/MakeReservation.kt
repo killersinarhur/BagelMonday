@@ -67,10 +67,9 @@ class MakeReservation : AppCompatActivity() {
         val reservation= DateReservation(datez as PlaceholderDate, user as User)
 
         val myRef1 = database.getReference("reservation")
-        myRef1.child(auth.currentUser!!.uid).child(BaseApplication.masterTakenList?.size.toString()).setValue(reservation)
-//        BaseApplication.userDates?.add(reservation)
+        myRef1.child(auth.currentUser!!.uid).child().setValue(reservation)
 
-        BaseApplication.organizeList()
+       // BaseApplication.organizeList()
         val intent = Intent(this, NaviagationActivity::class.java)
         intent.putExtra("changeMade", true)
         startActivity(intent)
