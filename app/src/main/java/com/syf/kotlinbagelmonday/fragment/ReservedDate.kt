@@ -21,7 +21,7 @@ class ReservedDate : Fragment() {
     internal var dates: ArrayList<DateReservation>? = null
     var mAdapter: FirebaseRecyclerAdapter<DateReservation, ReservedDateAdapter.ViewHolder>? = null
     val mref= FirebaseDatabase.getInstance().reference
-    val mDRRef= mref.child("reservation")
+    val mDRRef= mref.child("masterlist")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +48,6 @@ class ReservedDate : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
          super.onCreateView(inflater, container, savedInstanceState)
-        dates= BaseApplication.reservedDate
         val rootView= inflater!!.inflate(R.layout.activity_reserved_date,container,false)
         val recyclerView = rootView.findViewById(R.id.rv_reservedlist) as RecyclerView
         recyclerView.adapter = mAdapter

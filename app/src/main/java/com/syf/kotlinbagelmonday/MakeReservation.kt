@@ -67,7 +67,9 @@ class MakeReservation : AppCompatActivity() {
         val reservation= DateReservation(datez as PlaceholderDate, user as User)
 
         val myRef1 = database.getReference("reservation")
-        myRef1.child(auth.currentUser!!.uid).child().setValue(reservation)
+        myRef1.child(auth.currentUser!!.uid).push().setValue(reservation)
+        val myRef2= database.getReference("masterlist")
+        myRef2.push().setValue(reservation)
 
        // BaseApplication.organizeList()
         val intent = Intent(this, NaviagationActivity::class.java)

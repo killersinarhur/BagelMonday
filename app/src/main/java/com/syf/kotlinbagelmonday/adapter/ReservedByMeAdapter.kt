@@ -1,14 +1,19 @@
 package com.syf.kotlinbagelmonday.adapter
 
 import android.content.Intent
+import android.support.v7.widget.RecyclerView
+import android.util.Log
+import android.view.View
+import android.widget.Toast
 import com.syf.kotlinbagelmonday.MakeReservation
 import com.syf.kotlinbagelmonday.ViewReservation
+import com.syf.kotlinbagelmonday.fragment.ReservedByMe
 import com.syf.kotlinbagelmonday.model.DateReservation
 
 /**
  * Created by 212464350 on 5/9/17.
  */
-class ReservedByMeAdapter  (val availableDates: ArrayList<DateReservation>, context: android.content.Context) : android.support.v7.widget.RecyclerView.Adapter<ReservedByMeAdapter.ViewHolder>() {
+class ReservedByMeAdapter  (val availableDates: ArrayList<DateReservation>, context: android.content.Context) : RecyclerView.Adapter<ReservedByMeAdapter.ViewHolder>() {
     var context: android.content.Context
         internal set
 
@@ -38,7 +43,7 @@ class ReservedByMeAdapter  (val availableDates: ArrayList<DateReservation>, cont
         return availableDates.size
     }
 
-    class ViewHolder(itemView: android.view.View) : android.support.v7.widget.RecyclerView.ViewHolder(itemView), android.view.View.OnClickListener {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         internal var dates: android.widget.TextView
         internal var name: android.widget.TextView
 
@@ -49,13 +54,12 @@ class ReservedByMeAdapter  (val availableDates: ArrayList<DateReservation>, cont
             name= itemView.findViewById(com.syf.kotlinbagelmonday.R.id.name_of_person) as android.widget.TextView
 
         }
-        override fun onClick(v: android.view.View?) {
+        override fun onClick(v: View?) {
             val intent = Intent(v?.context, ViewReservation::class.java)
-            intent.putExtra("position", adapterPosition)
+            intent.putExtra("position",adapterPosition)
             v?.context!!.startActivity(intent)
 
         }
-
     }
 
 }
