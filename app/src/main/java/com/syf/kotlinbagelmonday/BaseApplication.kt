@@ -10,7 +10,6 @@ import com.google.firebase.database.ValueEventListener
 import com.syf.kotlinbagelmonday.model.DateReservation
 import com.syf.kotlinbagelmonday.model.PlaceholderDate
 import com.syf.kotlinbagelmonday.model.User
-import com.syf.kotlinbagelmonday.web.DataManager
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -43,55 +42,6 @@ class BaseApplication : Application() {
 
         }
 
-        fun getAllReservations() {
-
-            val reservationdb = FirebaseDatabase.getInstance().getReference("reservation")
-            val query = reservationdb.orderByValue()
-            query.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onCancelled(p0: DatabaseError?) {
-                    Log.e("DataManager", p0?.code.toString())
-                    Log.e("DataManager", p0?.message)
-                    Log.e("DataManager", p0?.details)
-                }
-
-                override fun onDataChange(p0: DataSnapshot?) {
-                    val arrayToSet = ArrayList<DateReservation>()
-                    Log.d("GAR-DM-1", p0.toString())
-                    Log.d("GAR-DM-2", p0!!.getValue().toString())
-                    Log.d("GAR-DM-3", p0!!.childrenCount.toString())
-                    val iterator = p0.children.iterator()
-                    val rangeEnds = p0.childrenCount - 1
-                    for (i in 0..rangeEnds) {
-                        val nextValue = iterator.next()
-                        if (nextValue.key !="dummy"){
-                            Log.d("GAR-DM-4", nextValue.toString())
-                            Log.d("GAR-DM-5", nextValue.getValue().toString())
-                            Log.d("GAR-DM-6", nextValue.children.iterator()
-                                    .next().getValue(DateReservation::class.java).toString())
-                            val rezDate = nextValue.children.iterator()
-                                    .next().getValue(DateReservation::class.java)
-                            arrayToSet.add(rezDate)
-
-
-                        }
-
-
-                    }
-
-                    masterTakenList=arrayToSet
-                    organizeList()
-
-                }
-
-
-
-            })
-
-
-
-
-
-        }
 
         fun organizeUserDates() {
 
@@ -124,8 +74,9 @@ class BaseApplication : Application() {
 
         }
 
-        private fun organizeReservedDate() {
+         fun organizeReservedDate() {
             var temp: ArrayList<PlaceholderDate>? = ArrayList<PlaceholderDate>()
+
             val iterator: Iterator<DateReservation>? = reservedDate!!.iterator()
 
             while (iterator!!.hasNext()) {
@@ -142,7 +93,7 @@ class BaseApplication : Application() {
 
         }
 
-        private fun removeSameDates(list3: ArrayList<PlaceholderDate>?, list4: ArrayList<PlaceholderDate>?):
+         fun removeSameDates(list3: ArrayList<PlaceholderDate>?, list4: ArrayList<PlaceholderDate>?):
                 ArrayList<PlaceholderDate>? {
             var unionList: ArrayList<PlaceholderDate> = ArrayList<PlaceholderDate>(list3)
             var intersectionList: ArrayList<PlaceholderDate> = ArrayList<PlaceholderDate>(list3)

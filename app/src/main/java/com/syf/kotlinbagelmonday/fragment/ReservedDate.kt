@@ -16,6 +16,7 @@ import com.syf.kotlinbagelmonday.R
 import com.syf.kotlinbagelmonday.adapter.ReservedByMeAdapter
 import com.syf.kotlinbagelmonday.adapter.ReservedDateAdapter
 import com.syf.kotlinbagelmonday.model.DateReservation
+import com.syf.kotlinbagelmonday.model.PlaceholderDate
 
 class ReservedDate : Fragment() {
     internal var dates: ArrayList<DateReservation>? = null
@@ -32,9 +33,25 @@ class ReservedDate : Fragment() {
                 viewHolder.dates.text=model.date.toString()
                 viewHolder.name.text= model.userDetails.toGetNameString()
 
+
+        }
+
+            override fun onDataChanged() {
+                super.onDataChanged()
             }
 
-        };
+
+
+    }
+    }
+
+    private fun removeItemfromtheList() {
+        val copyofList=ArrayList<PlaceholderDate>()
+        for(i in 0..ReservedByMe.mAdapter!!.itemCount){
+            copyofList.add(ReservedByMe.mAdapter!!.getItem(i).date)
+        }
+        BaseApplication.dates = BaseApplication.removeSameDates(copyofList, BaseApplication.dates)
+
 
     }
 
