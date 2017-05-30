@@ -78,7 +78,7 @@ class SignupActivity : AppCompatActivity() {
                             Toast.makeText(this@SignupActivity, "Authentication failed." + task.exception!!,
                                     Toast.LENGTH_SHORT).show()
                         } else {
-                            startActivity(Intent(this@SignupActivity, NaviagationActivity::class.java))
+                            startActivity(Intent(this@SignupActivity, CreateProfileActivity::class.java))
                             finish()
                         }
                     }

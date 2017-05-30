@@ -34,9 +34,8 @@ class ReservedByMe : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun onStart() {
+        super.onStart()
         val query:Query= mDRRef.child(auth.currentUser!!.uid).limitToFirst(50)
         mAdapter= object:FirebaseRecyclerAdapter<DateReservation, ReservedByMeAdapter.ViewHolder>(DateReservation::class.java, R.layout.reserveddate_adapter, ReservedByMeAdapter.ViewHolder::class.java, query) {
 
@@ -48,6 +47,29 @@ class ReservedByMe : Fragment() {
 
             }
         }
+    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+       /* val query:Query= mDRRef.child(auth.currentUser!!.uid).limitToFirst(50)
+        mAdapter= object:FirebaseRecyclerAdapter<DateReservation, ReservedByMeAdapter.ViewHolder>(DateReservation::class.java, R.layout.reserveddate_adapter, ReservedByMeAdapter.ViewHolder::class.java, query) {
+
+            override fun populateViewHolder(viewHolder: ReservedByMeAdapter.ViewHolder, model: DateReservation, position: Int) {
+
+                viewHolder.dates.text=model.date.toString()
+                viewHolder.name.text= model.userDetails.toGetNameString()
+
+
+            }
+        }*/
+    }
+
+    private fun removeItemfromtheList() {
+        val copyofList=ArrayList<DateReservation>()
+        for(i in 0..mAdapter!!.itemCount){
+            copyofList.add(mAdapter!!.getItem(i))
+        }
+
     }
 
 
@@ -79,5 +101,11 @@ class ReservedByMe : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        if (mAdapter?.itemCount!! >0){
+            removeItemfromtheList()
+        }
+
     }
+
+
 }

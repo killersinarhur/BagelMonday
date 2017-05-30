@@ -3,13 +3,15 @@
     package="com.syf.kotlinbagelmonday">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/bagel"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/bagel"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -26,10 +28,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".authentucation.ResetPasswordActivity" />
         <activity android:name=".ViewReservation" />
+        <activity android:name=".authentucation.CreateProfileActivity"></activity>
     </application>
 
 </manifest>
